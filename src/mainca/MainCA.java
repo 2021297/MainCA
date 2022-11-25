@@ -22,6 +22,7 @@ public class MainCA {
         System.out.println(u1.id);
             regularUser u2 = new regularUser ("jeff", "18/11/2000", "30/09/2021","slow");
         System.out.println(u2.id);
+        System.out.println("Please");
 
     }
     
