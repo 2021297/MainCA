@@ -10,19 +10,23 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author yjang
  */
 public class regularUser {
-    String name;
-    AtomicInteger NEXT_INT = new AtomicInteger(1);
     int id;
-    String DOB;
-    String admission;
-    String info;
+    String fname;   
+    String lname;
+    AtomicInteger NEXT_INT = new AtomicInteger(1);
+    String create_date;
+    String modify_date;
+    String user_type;
     
-    public regularUser (String name, String DOB, String admission, String info) {
-        this.name = name;
-        this.DOB = DOB;
-        this.admission = admission;
-        this.info = info;
-//        this.id = NEXT_INT.getAndAdd(1);
+    public regularUser (int id, String fname, String lname, String create_date, String modify_date, String user_type) {
         this.id = id;
+        this.fname= fname;
+        this.lname = lname;
+        this.create_date = create_date;
+        this.modify_date = modify_date;
+        this.user_type = user_type;
     }
+
+   
+
 }

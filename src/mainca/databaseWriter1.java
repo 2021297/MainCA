@@ -18,7 +18,7 @@ public class databaseWriter1 {
    String USER = "root";
    String PASS = "root";
     
-    public boolean databaseSetup() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+public boolean databaseSetup() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
       try{
         Connection conn = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -26,29 +26,42 @@ public class databaseWriter1 {
         
         stmt.execute("CREATE SCHEMA IF NOT EXISTS " + dbName + ";");
         stmt.execute("USE mainca");
-        /*
-        fname VARCHAR(30)
-        lname VARCHAR(30)
-        id INTEGER PRIMARY KEY
-        birth VARCHAR(30)
-        admission VARCHAR(30)
-        info TEXT(1000)
-        
-        */
         stmt.execute(
                 "CREATE TABLE IF NOT EXISTS maincadata ("
-                        + "name VARCHAR(30),"
                         + "id INT(10) NOT NULL PRIMARY KEY,"
-                        + "DOB VARCHAR(30),"
-                        + "admission VARCHAR(30),"
-                        + "info TEXT(1000));"
+                        + "fname VARCHAR(30),"
+                        + "lname VARCHAR(30),"
+                        + "create_date VARCHAR(30),"
+                        + "modify_date VARCHAR(30),"
+                        + "user_type VARCHAR(30));"
         );
         return true;
       }catch (SQLException e) {
           e.printStackTrace();
                   return false;
 
-      }
+      }}
+
+    boolean outputData(regularUser user) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
+          Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Statement stmt = conn.createStatement();
+            stmt.execute("USE mainca;");
+
+            stmt.execute(
+                    String.format("INSERT INTO maincadata (id, fname, lname, create_date, modify_date, user_type) "
+                            + "VALUES ( %d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\") ;",
+                            user.id, user.fname, user.lname, user.create_date, user.modify_date,user.user_type)
+            );
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
-}
+
 
