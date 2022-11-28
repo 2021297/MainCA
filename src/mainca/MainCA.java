@@ -32,6 +32,7 @@ public static void main(String[] args) throws ClassNotFoundException, Instantiat
         databaseReader1 input = new databaseReader1();
         userList = input.inputData();
         System.out.println(userList.get(0).fname);
+        //test
     }
     
 }
